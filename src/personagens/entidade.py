@@ -21,3 +21,14 @@ Métodos:
 
 Herdam dela: Jogador, Inimigo (e Chefe) e Projetil.
 """
+import pygame
+
+
+class Entidade:
+    def __init__(self, x, y, largura=16, altura=16, cor=(240, 240, 232), vida=1):
+        self.x = float(x)
+        self.y = float(y)
+        self.retangulo = pygame.Rect(round(x), round(y), largura, altura)
+        self.imagem = pygame.Surface((largura, altura))
+        self.imagem.fill(cor)
+        self.vida = vida

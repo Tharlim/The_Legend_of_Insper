@@ -19,3 +19,26 @@ Métodos:
 
 Usa: personagens/classes/.
 """
+import pygame
+from entidade import Entidade
+
+
+class Jogador(Entidade):
+    def __init__(self, x, y, classe=None, velocidade=100):
+        super().__init__(x, y, largura=16, altura=16, cor=(250, 210, 80))
+        self.classe = classe
+        self.velocidade = getattr(classe, "velocidade", velocidade)
+        self.direcao = pygame.Vector2(0, 1)
+        self.movimento = pygame.Vector2()
+
+    def teclas(self, teclas=None):
+        if teclas is None:
+            teclas = pygame.key.get_pressed()
+
+        self.movimento.update(
+            int(teclas[pygame.K_d]) - int(teclas[pygame.K_a]),
+            int(teclas[pygame.K_s]) - int(teclas[pygame.K_w]),
+        )
+        if self.movimento.length_squared() > 0:
+            self.movimento.normalize_ip()
+            self.direcao = self.movimento.copy()
