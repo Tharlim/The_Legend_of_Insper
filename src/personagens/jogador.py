@@ -20,7 +20,7 @@ Métodos:
 Usa: personagens/classes/.
 """
 import pygame
-from personagens.entidade import Entidade
+from entidade import Entidade
 
 
 class Jogador(Entidade):
